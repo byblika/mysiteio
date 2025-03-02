@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Системна помилка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f3f3f3;
+            margin: 0;
+            padding: 20px;
+        }
+        .error {
+            padding: 20px;
+            margin-top: 100px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px #1976d2;
+        }
+        button:active {
+            box-shadow: none;
+            transform: translateY(4px);
+        }
+        #screamer {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: url("https://imgur.com/a/sbnzNaL") center/cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+<div class="error">
+    <h2>Системна помилка</h2>
+    <p>Помилка: 0x800F0922</p>
+    <p>Недостатньо пам'яті для обробки команди</p>
+    <button onclick="startPrank()">OK</button>
+</div>
+
+<div id="screamer"></div>
+
+<script>
+function startPrank() {
+    let audio = new Audio("https://files.catbox.moe/pix4xo.mp3"); // Сюди встав свою mp3
+    audio.volume = 1.0;
+    audio.loop = true;
+    audio.play();
+
+    setTimeout(() => {
+        document.getElementById("screamer").style.display = "block";
+        let scream = new Audio("https://files.catbox.moe/pix4xo.mp3"); // Сюди звук скрімера
+        scream.volume = 1.0;
+        scream.play();
+    }, 5000);
+
+    window.onbeforeunload = function () {
+        return "Не можна закрити!";
+    };
+
+    setInterval(() => {
+        history.pushState(null, null, location.href);
+    }, 50);
+}
+</script>
+</body>
+</html>
